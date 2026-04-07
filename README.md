@@ -1,36 +1,76 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# baches.uy
 
-## Getting Started
+Mapa colaborativo para reportar baches en Uruguay, visibilizar el problema y facilitar presión pública con datos.
 
-First, run the development server:
+## Stack
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- Next.js 16
+- React 19
+- Tailwind CSS 4
+- Supabase
+- Leaflet
+
+## Variables de entorno
+
+Copiá [`.env.local.example`](/Users/juja/Desktop/Entrepeneur/Baches%20mvd/.env.local.example) a `.env.local` y completá:
+
+```env
+NEXT_PUBLIC_SUPABASE_URL=
+NEXT_PUBLIC_SUPABASE_ANON_KEY=
+NEXT_PUBLIC_SITE_URL=
+SUPABASE_SERVICE_ROLE_KEY=
+VOTE_FINGERPRINT_SALT=
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Notas:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- `NEXT_PUBLIC_SUPABASE_URL` y `NEXT_PUBLIC_SUPABASE_ANON_KEY` pueden usarse en el cliente.
+- `NEXT_PUBLIC_SITE_URL` define el dominio público usado en compartir links, PDFs y acciones cívicas.
+- `SUPABASE_SERVICE_ROLE_KEY` es secreta y solo debe existir en el servidor o en el hosting.
+- `VOTE_FINGERPRINT_SALT` se usa para hashear la huella de voto sin guardar IP o user-agent en claro.
+- Nunca subas `.env.local` al repositorio.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Desarrollo
 
-## Learn More
+```bash
+npm install
+npm run dev
+```
 
-To learn more about Next.js, take a look at the following resources:
+Si Next queda con caché vieja:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+rm -rf .next
+npm run dev
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Producción
 
-## Deploy on Vercel
+Antes de desplegar:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1. Configurá las 3 variables de entorno en tu hosting.
+2. Confirmá que el bucket `report-photos` exista en Supabase.
+3. Revisá las políticas RLS de `reports`.
+4. Ejecutá el `supabase/schema.sql` actualizado para crear `report_votes` y las nuevas columnas de estado.
+5. Probá creación de reportes, subida de fotos y votos de confirmación / denuncia formal / reparación.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Datos sensibles
+
+- Los emails se almacenan en Supabase pero no se exponen en lecturas públicas.
+- Las mutaciones sensibles pasan por endpoints del servidor con validación, CSRF y rate limiting básico.
+- La `SUPABASE_SERVICE_ROLE_KEY` no debe exponerse al frontend ni a logs.
+
+## Borrar reportes de prueba
+
+No hay endpoint público para borrar reportes.
+
+Hacelo desde Supabase:
+
+- Table Editor > `reports`
+- o con SQL:
+
+```sql
+delete from reports where id = '...';
+```
+
+Si el reporte tiene fotos, borrá también los objetos del bucket `report-photos`.
