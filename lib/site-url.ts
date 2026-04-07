@@ -1,7 +1,7 @@
 const PUBLIC_SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL ||
   process.env.SITE_URL ||
-  'https://baches.uy'
+  'https://bachesuy.com'
 
 function normalizeBaseUrl(url: string) {
   return url.endsWith('/') ? url.slice(0, -1) : url

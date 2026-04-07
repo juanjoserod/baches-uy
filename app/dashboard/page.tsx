@@ -2,7 +2,7 @@ import { buildDashboardStats } from '@/lib/analytics'
 import { getReports } from '@/lib/supabase'
 
 export const metadata = {
-  title: 'Dashboard — baches.uy',
+  title: 'Dashboard — bachesuy.com',
 }
 
 export const dynamic = 'force-dynamic'

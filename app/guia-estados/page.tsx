@@ -2,7 +2,7 @@ import { ArrowRight, CheckCircle2, Clock3, FileText, ShieldCheck, Wrench } from 
 import PrintActions from '@/components/PrintActions'
 
 export const metadata = {
-  title: 'Guía de estados — baches.uy',
+  title: 'Guía de estados — bachesuy.com',
 }
 
 const rows = [
@@ -58,7 +58,7 @@ export default function StatusGuidePage() {
               </p>
               <h1 className="text-3xl font-bold tracking-tight">Guía de estados de reportes</h1>
               <p className="mt-3 max-w-2xl text-sm leading-6 text-slate-600">
-                Criterio recomendado para administrar el ciclo de vida de un bache reportado en baches.uy,
+                Criterio recomendado para administrar el ciclo de vida de un bache reportado en bachesuy.com,
                 incluyendo cambios automáticos, participación comunitaria y tratamiento visual en el mapa.
               </p>
             </div>

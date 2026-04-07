@@ -2,9 +2,42 @@ import type { Metadata } from 'next'
 import './globals.css'
 import Header from '@/components/Header'
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://bachesuy.com'
+
 export const metadata: Metadata = {
-  title: 'baches.uy — Mapa de baches en Uruguay',
-  description: 'Reportá baches y agujeros en las calles de Uruguay. Mapa colaborativo de baches.',
+  metadataBase: new URL(siteUrl),
+  title: 'bachesuy.com — Mapa colaborativo de baches en Uruguay',
+  description: 'Reportá baches y agujeros en calles, caminos, veredas y ciclovías de Uruguay. Mapa ciudadano para visibilizar el problema y generar presión pública.',
+  alternates: {
+    canonical: '/',
+  },
+  openGraph: {
+    title: 'bachesuy.com — Mapa colaborativo de baches en Uruguay',
+    description: 'Reportá baches y ayudá a visibilizar el problema con datos, fotos y evidencia pública.',
+    url: siteUrl,
+    siteName: 'bachesuy.com',
+    locale: 'es_UY',
+    type: 'website',
+    images: [
+      {
+        url: '/opengraph-image',
+        width: 1200,
+        height: 630,
+        alt: 'bachesuy.com',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'bachesuy.com — Mapa colaborativo de baches en Uruguay',
+    description: 'Reportá baches y ayudá a visibilizar el problema con datos, fotos y evidencia pública.',
+    images: ['/twitter-image'],
+  },
+  icons: {
+    icon: '/icon.png',
+    shortcut: '/icon.png',
+    apple: '/apple-icon.png',
+  },
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

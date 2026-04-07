@@ -59,15 +59,27 @@ export default function ReportDetailClient({ report }: { report: Report }) {
         </div>
       )}
 
-      <div className="flex items-center gap-5 text-sm text-gray-500 mb-5">
-        <span className="flex items-center gap-1.5">
-          <ThumbsUp size={14} /> {reportState.confirmed_count} confirmaciones
+      <div className="mb-5 grid grid-cols-3 gap-2 rounded-2xl border border-sky-100 bg-white p-3 shadow-sm sm:flex sm:flex-wrap sm:items-center sm:gap-5">
+        <span className="flex min-w-0 flex-col gap-1 text-xs text-gray-500 sm:flex-row sm:items-center sm:gap-1.5 sm:text-sm">
+          <span className="inline-flex items-center gap-1.5 font-medium text-gray-700">
+            <ThumbsUp size={14} className="shrink-0 text-sky-600" />
+            {reportState.confirmed_count}
+          </span>
+          <span className="leading-tight">confirmaciones</span>
         </span>
-        <span className="flex items-center gap-1.5">
-          <MapPin size={14} /> {reportState.sent_confirmed_count} denuncias formales
+        <span className="flex min-w-0 flex-col gap-1 text-xs text-gray-500 sm:flex-row sm:items-center sm:gap-1.5 sm:text-sm">
+          <span className="inline-flex items-center gap-1.5 font-medium text-gray-700">
+            <MapPin size={14} className="shrink-0 text-sky-600" />
+            {reportState.sent_confirmed_count}
+          </span>
+          <span className="leading-tight">denuncias formales</span>
         </span>
-        <span className="flex items-center gap-1.5">
-          <Clock size={14} /> Reportado {timeAgo(reportState.created_at)}
+        <span className="flex min-w-0 flex-col gap-1 text-xs text-gray-500 sm:flex-row sm:items-center sm:gap-1.5 sm:text-sm">
+          <span className="inline-flex items-center gap-1.5 font-medium text-gray-700">
+            <Clock size={14} className="shrink-0 text-sky-600" />
+            Reportado
+          </span>
+          <span className="leading-tight">{timeAgo(reportState.created_at)}</span>
         </span>
       </div>
 

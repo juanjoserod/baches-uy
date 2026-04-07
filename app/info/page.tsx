@@ -3,13 +3,13 @@ import { Info, ListChecks, Lock, Lightbulb, BarChart3, Plus } from 'lucide-react
 import { DEPARTMENT_COMPLAINT_CHANNELS } from '@/lib/department-complaints'
 
 export const metadata = {
-  title: 'Info — baches.uy',
+  title: 'Info — bachesuy.com',
 }
 
 export default function InfoPage() {
   return (
     <div className="max-w-2xl mx-auto px-4 py-10 w-full">
-      <h1 className="text-2xl font-bold text-gray-900 mb-2">¿Qué es baches.uy?</h1>
+      <h1 className="text-2xl font-bold text-gray-900 mb-2">¿Qué es bachesuy.com?</h1>
       <p className="text-gray-600 mb-8">
         Un mapa colaborativo donde cualquier ciudadano puede reportar baches y agujeros en las
         calles de Uruguay.
@@ -20,7 +20,7 @@ export default function InfoPage() {
           <h2 className="font-semibold text-gray-800 mb-2 flex items-center gap-2"><Info size={16} className="text-sky-600" />¿Cómo funciona?</h2>
           <ol className="text-sm text-gray-600 space-y-2 list-decimal list-inside">
             <li>Encontrás un bache en la calle</li>
-            <li>Entrás a baches.uy y hacés clic en Reportar</li>
+            <li>Entrás a bachesuy.com y hacés clic en Reportar</li>
             <li>Marcás la ubicación en el mapa y subís una foto</li>
             <li>El reporte aparece en el mapa para que todos lo vean</li>
             <li>Otros usuarios pueden confirmar el bache</li>

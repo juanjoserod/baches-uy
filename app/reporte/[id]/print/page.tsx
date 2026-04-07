@@ -6,7 +6,7 @@ import { ROAD_TYPE_LABELS, STATUS_LABELS } from '@/types'
 import { buildReportUrl, getPublicSiteUrl } from '@/lib/site-url'
 
 export const metadata = {
-  title: 'Constancia de reporte — baches.uy',
+  title: 'Constancia de reporte — bachesuy.com',
 }
 
 export default async function ReportPrintPage({ params }: { params: Promise<{ id: string }> }) {
@@ -88,12 +88,12 @@ export default async function ReportPrintPage({ params }: { params: Promise<{ id
           <div className="print-section rounded-2xl border border-sky-100 bg-sky-50/60 px-4 py-3 mb-6 text-xs text-slate-600 flex items-start gap-3">
             <AlertTriangle size={15} className="text-sky-700 mt-0.5 shrink-0" />
             <div className="leading-5">
-              Esta constancia refleja la información pública disponible en baches.uy al momento de la emisión. No reemplaza la denuncia formal ante el organismo competente.
+              Esta constancia refleja la información pública disponible en bachesuy.com al momento de la emisión. No reemplaza la denuncia formal ante el organismo competente.
             </div>
           </div>
 
           <div className="border-t border-gray-200 pt-5 text-xs text-gray-500 flex flex-col gap-1">
-            <p><strong>Generado por:</strong> baches.uy</p>
+            <p><strong>Generado por:</strong> bachesuy.com</p>
             <p><strong>Fecha de emisión:</strong> {new Date().toLocaleString('es-UY')}</p>
             <p><strong>Enlace del reporte:</strong> {reportUrl}</p>
           </div>

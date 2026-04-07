@@ -1,7 +1,7 @@
 import ReportForm from '@/components/ReportForm'
 
 export const metadata = {
-  title: 'Reportar bache — baches.uy',
+  title: 'Reportar bache — bachesuy.com',
 }
 
 export default function ReportarPage() {

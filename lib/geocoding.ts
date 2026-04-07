@@ -1,5 +1,5 @@
 const NOMINATIM_BASE = 'https://nominatim.openstreetmap.org'
-const HEADERS = { 'User-Agent': 'BachesUY/1.0 (baches.uy)' }
+const HEADERS = { 'User-Agent': 'BachesUY/1.0 (bachesuy.com)' }
 
 export interface GeocodingResult {
   lat: number
