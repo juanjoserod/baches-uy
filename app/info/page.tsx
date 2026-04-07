@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { Info, ListChecks, Lock, Lightbulb, BarChart3, Plus } from 'lucide-react'
+import { Info, ListChecks, Lock, Lightbulb, BarChart3, Mail, Plus } from 'lucide-react'
 import { DEPARTMENT_COMPLAINT_CHANNELS } from '@/lib/department-complaints'
 
 export const metadata = {
@@ -103,6 +103,20 @@ export default function InfoPage() {
           <h2 className="font-semibold text-gray-800 mb-2 flex items-center gap-2"><BarChart3 size={16} className="text-sky-600" />Datos y evidencia</h2>
           <p className="text-sm text-gray-600">
             Cada reporte puede compartirse, descargarse como constancia PDF y alimentar un dashboard público con estadísticas para reforzar la visibilidad del problema.
+          </p>
+        </section>
+
+        <section className="bg-white border border-gray-200 rounded-xl p-5">
+          <h2 className="font-semibold text-gray-800 mb-2 flex items-center gap-2"><Mail size={16} className="text-sky-600" />Contacto</h2>
+          <p className="text-sm text-gray-600">
+            Para consultas, prensa, sugerencias o problemas con la plataforma, puedes escribir a{' '}
+            <a
+              href="mailto:juanjoserodriguezuy@gmail.com"
+              className="font-medium text-sky-700 hover:underline"
+            >
+              juanjoserodriguezuy@gmail.com
+            </a>
+            .
           </p>
         </section>
 

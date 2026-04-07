@@ -98,6 +98,7 @@ Más detalles en [SECURITY.md](SECURITY.md).
 
 - Si encuentras un bug o quieres proponer una mejora, abre un issue en GitHub.
 - Si detectas un problema de seguridad, sigue las indicaciones de [SECURITY.md](SECURITY.md).
+- Para consultas generales, prensa o contacto directo: `juanjoserodriguezuy@gmail.com`
 
 ## Mantenimiento
 
