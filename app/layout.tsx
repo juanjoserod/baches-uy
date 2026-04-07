@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import './globals.css'
 import Header from '@/components/Header'
+import { Analytics } from '@vercel/analytics/next'
 
 export const metadata: Metadata = {
   title: 'baches.uy — Mapa de baches en Uruguay',
@@ -13,6 +14,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="h-full flex flex-col bg-gray-50 font-sans">
         <Header />
         <main className="flex-1 flex flex-col">{children}</main>
+        <Analytics />
       </body>
     </html>
   )
