@@ -1,18 +1,40 @@
-# baches.uy
+# bachesuy.com
 
-Mapa colaborativo para reportar baches en Uruguay, visibilizar el problema y facilitar presión pública con datos.
+![Logo de bachesuy.com](public/baches-wordmark.png)
 
-## Stack
+Mapa colaborativo para reportar baches en Uruguay, visibilizar el problema y generar presión pública con datos, fotos y evidencia compartible.
 
-- Next.js 16
-- React 19
-- Tailwind CSS 4
-- Supabase
-- Leaflet
+## Qué hace
 
-## Variables de entorno
+- Permite reportar baches con ubicación, fotos y descripción.
+- Muestra los reportes en un mapa público con clustering visual.
+- Permite confirmar reportes, marcar denuncias formales y registrar reparaciones.
+- Genera constancias PDF y links para compartir en redes o mensajería.
+- Centraliza canales oficiales de reclamo por departamento.
 
-Copiá [`.env.local.example`](/Users/juja/Desktop/Entrepeneur/Baches%20mvd/.env.local.example) a `.env.local` y completá:
+## Por qué es útil
+
+El proyecto busca transformar un problema cotidiano en evidencia pública fácil de compartir. La idea no es reemplazar los canales oficiales, sino facilitar que más personas visibilicen el problema, documenten casos y generen presión cívica con datos.
+
+## Cómo empezar
+
+### Requisitos
+
+- Node.js 22
+- npm
+- Un proyecto de Supabase
+
+La versión recomendada de Node está definida en [`.nvmrc`](.nvmrc).
+
+### Instalación
+
+```bash
+npm install
+```
+
+### Variables de entorno
+
+Copiá [`.env.local.example`](.env.local.example) a `.env.local` y completá:
 
 ```env
 NEXT_PUBLIC_SUPABASE_URL=
@@ -24,53 +46,59 @@ VOTE_FINGERPRINT_SALT=
 
 Notas:
 
-- `NEXT_PUBLIC_SUPABASE_URL` y `NEXT_PUBLIC_SUPABASE_ANON_KEY` pueden usarse en el cliente.
-- `NEXT_PUBLIC_SITE_URL` define el dominio público usado en compartir links, PDFs y acciones cívicas.
-- `SUPABASE_SERVICE_ROLE_KEY` es secreta y solo debe existir en el servidor o en el hosting.
+- `NEXT_PUBLIC_SUPABASE_URL` y `NEXT_PUBLIC_SUPABASE_ANON_KEY` son públicas.
+- `NEXT_PUBLIC_SITE_URL` define el dominio usado en links compartidos, PDFs y metadatos.
+- `SUPABASE_SERVICE_ROLE_KEY` es privada y solo debe vivir en el servidor o en el hosting.
 - `VOTE_FINGERPRINT_SALT` se usa para hashear la huella de voto sin guardar IP o user-agent en claro.
 - Nunca subas `.env.local` al repositorio.
 
-## Desarrollo
+### Base de datos
+
+El proyecto usa Supabase para persistencia, fotos y lógica de votos.
+
+Antes de usar el sistema completo, ejecutá el schema de [Supabase](supabase/schema.sql) y confirmá que exista el bucket `report-photos`.
+
+### Desarrollo local
+
+Modo recomendado:
 
 ```bash
-npm install
-npm run dev
+npm run dev:stable
 ```
 
-Si Next queda con caché vieja:
+Ese script usa Webpack en vez de Turbopack, que en este proyecto resultó más estable para desarrollo local.
+
+Si necesitas limpiar caché de Next:
 
 ```bash
 rm -rf .next
-npm run dev
+npm run dev:stable
 ```
 
-## Producción
+## Deploy
 
-Antes de desplegar:
+Para desplegar en Vercel:
 
-1. Configurá las 3 variables de entorno en tu hosting.
-2. Confirmá que el bucket `report-photos` exista en Supabase.
-3. Revisá las políticas RLS de `reports`.
-4. Ejecutá el `supabase/schema.sql` actualizado para crear `report_votes` y las nuevas columnas de estado.
-5. Probá creación de reportes, subida de fotos y votos de confirmación / denuncia formal / reparación.
+1. Importá el repositorio.
+2. Cargá las variables de entorno reales en el panel del proyecto.
+3. Configurá `NEXT_PUBLIC_SITE_URL` con el dominio final.
+4. Redeployá.
 
-## Datos sensibles
+Antes de lanzar públicamente, conviene revisar la checklist de [pre-launch](PRELAUNCH_CHECKLIST.md).
+
+## Seguridad y datos sensibles
 
 - Los emails se almacenan en Supabase pero no se exponen en lecturas públicas.
 - Las mutaciones sensibles pasan por endpoints del servidor con validación, CSRF y rate limiting básico.
-- La `SUPABASE_SERVICE_ROLE_KEY` no debe exponerse al frontend ni a logs.
+- `SUPABASE_SERVICE_ROLE_KEY` nunca debe exponerse al frontend ni al repositorio.
 
-## Borrar reportes de prueba
+Más detalles en [SECURITY.md](SECURITY.md).
 
-No hay endpoint público para borrar reportes.
+## Dónde pedir ayuda
 
-Hacelo desde Supabase:
+- Si encuentras un bug o quieres proponer una mejora, abre un issue en GitHub.
+- Si detectas un problema de seguridad, sigue las indicaciones de [SECURITY.md](SECURITY.md).
 
-- Table Editor > `reports`
-- o con SQL:
+## Mantenimiento
 
-```sql
-delete from reports where id = '...';
-```
-
-Si el reporte tiene fotos, borrá también los objetos del bucket `report-photos`.
+Proyecto mantenido actualmente por Juan José Rodríguez. Las contribuciones, ideas y mejoras son bienvenidas.
