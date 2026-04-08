@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import './globals.css'
 import Header from '@/components/Header'
+import { Analytics } from '@vercel/analytics/next'
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://bachesuy.com'
 
@@ -46,6 +47,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="h-full flex flex-col bg-gray-50 font-sans">
         <Header />
         <main className="flex-1 flex flex-col">{children}</main>
+        <Analytics />
       </body>
     </html>
   )
