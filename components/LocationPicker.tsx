@@ -125,7 +125,7 @@ export default function LocationPicker({
   return (
     <div>
       {/* Search input */}
-      <div className="relative mb-2">
+      <div className="relative mb-2 z-[1200]">
         <input
           id={searchInputId}
           name={searchInputName}
@@ -141,26 +141,28 @@ export default function LocationPicker({
             Buscando...
           </span>
         )}
-        {suggestions.length > 0 && (
-          <ul className="absolute z-50 left-0 right-0 top-full mt-1 bg-white border border-gray-200 rounded-xl shadow-lg overflow-hidden text-sm">
-            {suggestions.map((s, i) => (
-              <li key={i}>
-                <button
-                  type="button"
-                  onClick={() => handleSelectSuggestion(s)}
-                  className="w-full text-left px-4 py-2.5 hover:bg-gray-50 border-b border-gray-50 last:border-0"
-                >
-                  <p className="font-medium text-gray-800 truncate">{s.address}</p>
-                  <p className="text-xs text-gray-500 truncate">{s.department}</p>
-                </button>
-              </li>
-            ))}
-          </ul>
-        )}
       </div>
       <p className="text-xs text-gray-500 mb-2">O hacé clic directamente en el mapa para marcar el bache</p>
       {/* Map */}
-      <div className="rounded-xl overflow-hidden border border-gray-200" style={{ height: 320 }}>
+      <div className="relative z-0 rounded-xl overflow-hidden border border-gray-200" style={{ height: 320 }}>
+        {suggestions.length > 0 && (
+          <div className="absolute inset-x-3 top-3 z-[1200]">
+            <ul className="overflow-hidden rounded-2xl border border-gray-200 bg-white text-sm shadow-[0_16px_40px_rgba(16,33,51,0.18)]">
+              {suggestions.map((s, i) => (
+                <li key={i}>
+                  <button
+                    type="button"
+                    onClick={() => handleSelectSuggestion(s)}
+                    className="w-full text-left px-4 py-3 hover:bg-gray-50 border-b border-gray-100 last:border-0"
+                  >
+                    <p className="font-medium text-gray-800 truncate">{s.address}</p>
+                    <p className="text-xs text-gray-500 truncate">{s.department}</p>
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
         <div ref={containerRef} className="w-full h-full" />
       </div>
     </div>
