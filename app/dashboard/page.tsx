@@ -3,6 +3,7 @@ import { getReports } from '@/lib/supabase'
 
 export const metadata = {
   title: 'Dashboard — bachesuy.com',
+  description: 'Estadísticas públicas sobre baches reportados en Uruguay: actividad reciente, departamentos más afectados, estados y tipos de vía.',
 }
 
 export const dynamic = 'force-dynamic'

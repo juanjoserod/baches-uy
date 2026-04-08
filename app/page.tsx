@@ -3,6 +3,10 @@ import StatsBar from '@/components/StatsBar'
 import HomeMap from '@/components/HomeMap'
 
 export const dynamic = 'force-dynamic'
+export const metadata = {
+  title: 'Mapa — bachesuy.com',
+  description: 'Mapa ciudadano de baches en Uruguay para explorar reportes, ver zonas afectadas y compartir evidencia pública.',
+}
 
 export default async function HomePage() {
   const [reports, stats, deptCounts] = await Promise.all([

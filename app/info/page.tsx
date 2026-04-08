@@ -4,6 +4,7 @@ import { DEPARTMENT_COMPLAINT_CHANNELS } from '@/lib/department-complaints'
 
 export const metadata = {
   title: 'Info — bachesuy.com',
+  description: 'Cómo funciona bachesuy.com, qué significan los estados, cómo se usan los datos y cuáles son los canales oficiales de reclamo por departamento.',
 }
 
 export default function InfoPage() {
@@ -110,11 +111,8 @@ export default function InfoPage() {
           <h2 className="font-semibold text-gray-800 mb-2 flex items-center gap-2"><Mail size={16} className="text-sky-600" />Contacto</h2>
           <p className="text-sm text-gray-600">
             Para consultas, prensa, sugerencias o problemas con la plataforma, puedes escribir a{' '}
-            <a
-              href="mailto:juanjoserodriguezuy@gmail.com"
-              className="font-medium text-sky-700 hover:underline"
-            >
-              juanjoserodriguezuy@gmail.com
+            <a href="mailto:bachesuycontacto@gmail.com" className="font-medium text-sky-700 hover:underline">
+              bachesuycontacto@gmail.com
             </a>
             .
           </p>

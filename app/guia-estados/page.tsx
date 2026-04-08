@@ -3,6 +3,7 @@ import PrintActions from '@/components/PrintActions'
 
 export const metadata = {
   title: 'Guía de estados — bachesuy.com',
+  description: 'Criterios y reglas sugeridas para el ciclo de vida de un reporte ciudadano: nuevo, confirmado, enviado, reparado y cerrado.',
 }
 
 const rows = [
