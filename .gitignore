@@ -25,6 +25,7 @@
 .DS_Store*
 *.pem
 Baches uy logo.png
+reports/*.pdf
 
 # debug
 npm-debug.log*
