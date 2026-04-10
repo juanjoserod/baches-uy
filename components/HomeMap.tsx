@@ -74,23 +74,23 @@ export default function HomeMap({ reports, deptCounts }: HomeMapProps) {
             Observatorio ciudadano
           </div>
           <h1 className="text-3xl sm:text-[2.15rem] leading-tight font-semibold text-slate-950 tracking-tight mb-3">
-            Hacé visible el estado real de las calles en Uruguay
+            Ayudá a solucionar los baches en las calles del Uruguay
           </h1>
           <p className="text-slate-600 text-sm sm:text-[15px] leading-6 mb-6">
-            Un mapa colaborativo para reportar baches, amplificar reclamos vecinales y ordenar la conversación pública con evidencia clara.
+            Un mapa para reportar baches, ver que zonas son las más afectadas y hacer presión para mejorar la vía pública de todos los uruguayos.
           </p>
           <p className="text-xs text-slate-500 mb-6 whitespace-nowrap overflow-hidden text-ellipsis">
-            Inspirado en <a href="https://asfaltkje.si/" target="_blank" rel="noopener noreferrer" className="font-semibold text-sky-700 hover:text-sky-800">asfaltkje.si</a>, adaptado al contexto uruguayo.
+            Inspirado en <a href="https://asfaltkje.si/" target="_blank" rel="noopener noreferrer" className="font-semibold text-sky-700 hover:text-sky-800">asfaltkje.si</a> (Eslovenia).
           </p>
           <div className="grid gap-3 sm:grid-cols-3 mb-6">
             <div className="rounded-2xl bg-white/90 border border-sky-100 p-3">
               <ShieldAlert size={16} className="text-sky-600 mb-2" />
-              <p className="text-xs font-semibold text-slate-800">Ubicaciones concretas</p>
+              <p className="text-xs font-semibold text-slate-800">Ubicá los baches</p>
               <p className="text-xs text-slate-500 mt-1">Cada punto ayuda a mostrar dónde se concentra el problema.</p>
             </div>
             <div className="rounded-2xl bg-white/90 border border-sky-100 p-3">
               <Share2 size={16} className="text-sky-600 mb-2" />
-              <p className="text-xs font-semibold text-slate-800">Difusión rápida</p>
+              <p className="text-xs font-semibold text-slate-800">Compartí y hacé que llegue a más gente</p>
               <p className="text-xs text-slate-500 mt-1">Compartí reportes y convertí casos aislados en presión colectiva.</p>
             </div>
             <div className="rounded-2xl bg-white/90 border border-sky-100 p-3">
@@ -99,10 +99,10 @@ export default function HomeMap({ reports, deptCounts }: HomeMapProps) {
               <p className="text-xs text-slate-500 mt-1">Visualizá volumen por zona sin perder claridad de uso.</p>
             </div>
           </div>
-          <div className="flex flex-wrap items-center gap-3">
+          <div className="flex flex-col items-stretch gap-3 sm:items-start">
             <Link
               href="/reportar"
-              className="inline-flex items-center gap-2 bg-sky-600 hover:bg-sky-700 text-white font-bold px-5 py-3 rounded-full shadow-[0_14px_28px_rgba(23,106,182,0.28)] transition-all hover:-translate-y-0.5 text-sm"
+              className="inline-flex w-full items-center justify-center gap-2 bg-sky-600 hover:bg-sky-700 text-white font-bold px-5 py-4 rounded-full shadow-[0_14px_28px_rgba(23,106,182,0.28)] transition-all hover:-translate-y-0.5 text-base sm:max-w-md"
             >
               <Plus size={16} strokeWidth={2.5} /> Reportar bache
             </Link>
