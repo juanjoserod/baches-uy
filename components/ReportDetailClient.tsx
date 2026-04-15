@@ -10,6 +10,7 @@ import MapViewDynamic from '@/components/MapViewDynamic'
 import PhotoLightbox from '@/components/PhotoLightbox'
 import ReportCivicActions from '@/components/ReportCivicActions'
 import SharePanel from '@/components/SharePanel'
+import ReportNeighborUpdates from '@/components/ReportNeighborUpdates'
 import { timeAgo } from '@/lib/geocoding'
 import { useState } from 'react'
 
@@ -88,6 +89,8 @@ export default function ReportDetailClient({ report }: { report: Report }) {
       </div>
 
       <ReportCivicActions report={reportState} />
+
+      <ReportNeighborUpdates reportId={reportState.id} />
 
       <SharePanel reportId={reportState.id} address={reportState.address} department={reportState.department} />
     </div>

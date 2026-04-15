@@ -1,6 +1,13 @@
 export type RoadType = 'calle' | 'vereda' | 'ciclovia' | 'camino'
 export type ReportStatus = 'nuevo' | 'confirmado' | 'enviado' | 'reparado' | 'cerrado'
 export type ReportVoteType = 'confirm_exists' | 'confirm_sent' | 'confirm_repaired'
+export type ReportCommentUpdateType =
+  | 'still_there'
+  | 'worse'
+  | 'repaired_claim'
+  | 'hazard'
+  | 'formal_complaint'
+  | 'general'
 
 export interface Report {
   id: string
@@ -45,6 +52,16 @@ export interface DepartmentComplaintChannel {
   kind: 'complaint_form' | 'official_contact'
 }
 
+export interface ReportComment {
+  id: string
+  created_at: string
+  report_id: string
+  author_alias: string
+  update_type: ReportCommentUpdateType
+  body: string
+  status: 'pending' | 'published' | 'hidden'
+}
+
 export const ROAD_TYPE_LABELS: Record<RoadType, string> = {
   calle: 'Calle',
   vereda: 'Vereda',
@@ -72,6 +89,15 @@ export const VOTE_TYPE_LABELS: Record<ReportVoteType, string> = {
   confirm_exists: 'Confirmar bache',
   confirm_sent: 'Marcar denuncia enviada',
   confirm_repaired: 'Marcar como reparado',
+}
+
+export const COMMENT_UPDATE_TYPE_LABELS: Record<ReportCommentUpdateType, string> = {
+  still_there: 'Sigue igual',
+  worse: 'Empeoró',
+  repaired_claim: 'Parece reparado',
+  hazard: 'Zona peligrosa',
+  formal_complaint: 'Hice denuncia formal',
+  general: 'Comentario general',
 }
 
 export const DEPARTMENTS = [

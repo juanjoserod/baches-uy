@@ -1,8 +1,22 @@
-import type { CreateReportInput, ReportVoteType, RoadType, ReportStatus } from '@/types'
+import type {
+  CreateReportInput,
+  ReportCommentUpdateType,
+  ReportVoteType,
+  RoadType,
+  ReportStatus,
+} from '@/types'
 
 const ROAD_TYPES = new Set<RoadType>(['calle', 'vereda', 'ciclovia', 'camino'])
 const REPORT_STATUSES = new Set<ReportStatus>(['nuevo', 'confirmado', 'enviado', 'reparado', 'cerrado'])
 const REPORT_VOTE_TYPES = new Set<ReportVoteType>(['confirm_exists', 'confirm_sent', 'confirm_repaired'])
+const REPORT_COMMENT_UPDATE_TYPES = new Set<ReportCommentUpdateType>([
+  'still_there',
+  'worse',
+  'repaired_claim',
+  'hazard',
+  'formal_complaint',
+  'general',
+])
 
 export function sanitizeText(value: string, maxLength: number) {
   return value
@@ -23,6 +37,10 @@ export function escapeHtml(value: string) {
 
 function isValidEmail(value: string) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)
+}
+
+function hasLinkLikeText(value: string) {
+  return /(https?:\/\/|www\.|[a-z0-9-]+\.[a-z]{2,}\/)/i.test(value)
 }
 
 function isValidPhotoUrl(value: string) {
@@ -112,4 +130,52 @@ export function validateVoteType(input: unknown):
   }
 
   return { success: true, data: voteType }
+}
+
+export function validateCreateReportCommentInput(input: unknown):
+  | {
+    success: true
+    data: {
+      author_alias: string
+      email: string
+      update_type: ReportCommentUpdateType
+      body: string
+    }
+  }
+  | { success: false; error: string } {
+  if (!input || typeof input !== 'object') {
+    return { success: false, error: 'Solicitud inválida.' }
+  }
+
+  const payload = input as Record<string, unknown>
+  const authorAlias = sanitizeText(String(payload.author_alias ?? ''), 40)
+  const email = sanitizeText(String(payload.email ?? ''), 160).toLowerCase()
+  const updateType = String(payload.update_type ?? '') as ReportCommentUpdateType
+  const body = sanitizeText(String(payload.body ?? ''), 500)
+
+  if (authorAlias.length < 2) {
+    return { success: false, error: 'Ingresá un alias de al menos 2 caracteres.' }
+  }
+  if (!isValidEmail(email)) {
+    return { success: false, error: 'Ingresá un email válido.' }
+  }
+  if (!REPORT_COMMENT_UPDATE_TYPES.has(updateType)) {
+    return { success: false, error: 'Elegí un tipo de actualización válido.' }
+  }
+  if (body.length < 10) {
+    return { success: false, error: 'La actualización debe tener al menos 10 caracteres.' }
+  }
+  if (hasLinkLikeText(body)) {
+    return { success: false, error: 'Por seguridad, las actualizaciones no pueden incluir links.' }
+  }
+
+  return {
+    success: true,
+    data: {
+      author_alias: authorAlias,
+      email,
+      update_type: updateType,
+      body,
+    },
+  }
 }
