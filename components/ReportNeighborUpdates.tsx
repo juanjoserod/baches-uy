@@ -85,9 +85,6 @@ export default function ReportNeighborUpdates({ reportId }: { reportId: string }
         </div>
         <div>
           <h2 className="text-base font-bold text-slate-900">Actualizaciones de vecinos</h2>
-          <p className="mt-1 text-sm leading-5 text-slate-500">
-            Sumá contexto del lugar sin publicar datos personales. El email es obligatorio para reducir abuso, pero no se muestra.
-          </p>
         </div>
       </div>
 

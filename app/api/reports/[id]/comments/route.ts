@@ -11,6 +11,15 @@ import {
 import { hashCommentEmail, mapPublicReportComment } from '@/lib/report-comments'
 import { validateCreateReportCommentInput, validateUuid } from '@/lib/validation'
 
+function shouldAutoPublishComments() {
+  const value = String(process.env.COMMENT_AUTO_PUBLISH ?? '')
+    .trim()
+    .replace(/^['"]|['"]$/g, '')
+    .toLowerCase()
+
+  return value === 'true'
+}
+
 export async function GET(
   _request: Request,
   { params }: { params: Promise<{ id: string }> }
@@ -90,7 +99,7 @@ export async function POST(
     }
 
     const commenterHash = await getHashedVoterFingerprint()
-    const status = process.env.COMMENT_AUTO_PUBLISH === 'true' ? 'published' : 'pending'
+    const status = shouldAutoPublishComments() ? 'published' : 'pending'
 
     const { data, error } = await supabase
       .from('report_comments')
