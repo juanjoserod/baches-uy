@@ -1,5 +1,5 @@
 import { createClient } from '@supabase/supabase-js'
-import type { Report, DepartmentCount } from '@/types'
+import type { Report, DepartmentCount, ReportComment, ReportCommentUpdateType } from '@/types'
 import { getCsrfTokenFromDocument } from '@/lib/browser-security'
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!
@@ -146,4 +146,48 @@ export async function castReportVote(id: string, voteType: 'confirm_exists' | 'c
     report: payload.report,
     active: Boolean(payload.active),
   }
+}
+
+export async function getReportComments(reportId: string): Promise<ReportComment[]> {
+  const response = await fetch(`/api/reports/${reportId}/comments`, {
+    credentials: 'same-origin',
+    cache: 'no-store',
+  })
+
+  const payload = (await response.json()) as ReportComment[] | { error?: string }
+  if (!response.ok || !Array.isArray(payload)) {
+    throw new Error(('error' in payload && payload.error) || 'No se pudieron cargar las actualizaciones.')
+  }
+
+  return payload
+}
+
+export async function createReportComment(input: {
+  reportId: string
+  author_alias: string
+  email: string
+  update_type: ReportCommentUpdateType
+  body: string
+}): Promise<ReportComment> {
+  const response = await fetch(`/api/reports/${input.reportId}/comments`, {
+    method: 'POST',
+    credentials: 'same-origin',
+    headers: {
+      'Content-Type': 'application/json',
+      'x-csrf-token': getCsrfTokenFromDocument(),
+    },
+    body: JSON.stringify({
+      author_alias: input.author_alias,
+      email: input.email,
+      update_type: input.update_type,
+      body: input.body,
+    }),
+  })
+
+  const payload = (await response.json()) as ReportComment | { error?: string }
+  if (!response.ok || !('id' in payload)) {
+    throw new Error(('error' in payload && payload.error) || 'No se pudo guardar la actualización.')
+  }
+
+  return payload
 }
